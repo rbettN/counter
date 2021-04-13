@@ -32,10 +32,21 @@ export const subtract = (value) => {
     }
 };
 
-export const storeResult = (result) => {
+export const saveResult = (result) => {
     return {
         type: STORE_RESULT,
         result: result
+    }
+}
+
+/*The idea is to create asynchornous action creators which dispatch actions created by synchronous ones*/
+export const storeResult = (result) => {
+    /*The dipatch argument is given due to Redux Thunk, which runs between the dispatch of an
+    action and the point that the action reaches the reducer*/
+    return function (dispatch) {
+        setTimeout(() => {
+            dispatch(saveResult(result));
+        }, 2000);
     }
 };
 
